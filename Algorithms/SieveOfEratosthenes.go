@@ -2,7 +2,7 @@
 // 23/09/2012
 //
 // How to run:
-//   go run SieveOfErastosthenes.go 11
+//   go run SieveOfEratosthenes.go 11
 //      [1 2 3 5 7]
 //
 // License:
@@ -17,7 +17,7 @@ import (
 	"strconv"
 )
 
-// Sieve of Erastosthenes
+// Sieve of Eratosthenes
 func primesLowerThan(n int64) []int64 {
 	bools := make([]bool, n+1)
 	primes := make([]int64, n+1)
