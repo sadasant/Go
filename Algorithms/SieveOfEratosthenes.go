@@ -3,7 +3,7 @@
 //
 // How to run:
 //   go run SieveOfEratosthenes.go 11
-//      [1 2 3 5 7]
+//      [2 3 5 7]
 // 
 // Runs almost instantly even over 5000000.
 //
@@ -23,8 +23,7 @@ import (
 func primesLowerThan(n int64) []int64 {
 	bools := make([]bool, n+1)
 	primes := make([]int64, n+1)
-	primes[0] = 1
-	c := 1
+	c := 0
 	for i := int64(2); i < n; i++ {
 		if !bools[i] {
 			bools[i] = true
