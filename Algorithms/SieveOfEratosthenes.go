@@ -4,6 +4,8 @@
 // How to run:
 //   go run SieveOfEratosthenes.go 11
 //      [1 2 3 5 7]
+// 
+// Runs almost instantly even over 5000000.
 //
 // License:
 //   Public Domain
