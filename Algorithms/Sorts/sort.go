@@ -1,8 +1,23 @@
 // Daniel R. (sadasant.com)
 // 25/09/2012
 //
-// Test it with:
-//   go run sort.go
+// Example test:
+//   go run sort.go 40000000
+//   Testing Insertion Sort
+//   
+//   Testing Bubble Sort
+//   
+//   Testing Quick Sort
+//   
+//   Testing Merge Sort
+//   
+//   
+//   Merge Sort Lasted:  3us
+//   Quick Sort Lasted:  2us
+//   Bubble Sort Lasted:  3us
+//   Insertion Sort Lasted:  3us
+//   
+//   Arrays were too large to print
 //
 // License:
 //   Public Domain
@@ -11,21 +26,26 @@
 package main // TODO Make an Algorithms package
 
 import (
+	"flag"
+	"strconv"
 	"fmt"
 	"time"
+	"math/rand"
 )
 
 func Insertion(array []int) []int {
 	var now int
-	for i, v := range array {
+	answer := make([]int, len(array))
+	copy(answer, array)
+	for i, v := range answer {
 		now = i
-		for now > 0 && array[now-1] > v {
-			array[now] = array[now-1]
+		for now > 0 && answer[now-1] > v {
+			answer[now] = answer[now-1]
 			now--
 		}
-		array[now] = v
+		answer[now] = v
 	}
-	return array
+	return answer
 }
 
 func Bubble(array []int) []int {
@@ -100,38 +120,53 @@ func merge(a, b []int) []int {
 }
 
 func main() {
-	// Arrays
-	array := []int{2, 5, 4, 16, -15, -22, 239323, -123123}
+	flag.Parse()
+	max, _ := strconv.Atoi(flag.Arg(0))
+
+	// Too damn high
+	tooLarge := false
+
+	if (max > 10000) {
+		defer println("\nArrays were too large to print\n")
+		tooLarge = true
+	}
+
+	// Array
+	array := make([]int, max)
+	for i := 0; i < max; i++ {
+		array[i] = rand.Int()
+	}
 
 	// Time
 	start := time.Now()
 
 	println("Testing Insertion Sort")
 	start = time.Now()
-	fmt.Printf("  %v\n", Insertion(array))
-	fmt.Println("  Lasted: ", time.Since(start))
-
-	// Functions affect the original arrays
-	array = []int{2, 5, 4, 16, -15, -22}
+	if !tooLarge {
+		fmt.Printf("  %v\n", Insertion(array))
+	}
+	defer fmt.Println("Insertion Sort Lasted: ", time.Since(start))
 
 	println("\nTesting Bubble Sort")
 	start = time.Now()
-	fmt.Printf("  %v\n", Bubble(array))
-	fmt.Println("  Lasted: ", time.Since(start))
-
-	// Functions affect the original arrays
-	array = []int{2, 5, 4, 16, -15, -22}
+	if !tooLarge {
+		fmt.Printf("  %v\n", Bubble(array))
+	}
+	defer fmt.Println("Bubble Sort Lasted: ", time.Since(start))
 
 	println("\nTesting Quick Sort")
 	start = time.Now()
-	fmt.Printf("  %v\n", Quick(array))
-	fmt.Println("  Lasted: ", time.Since(start))
-
-	// Functions affect the original arrays
-	array = []int{2, 5, 4, 16, -15, -22}
+	if !tooLarge {
+		fmt.Printf("  %v\n", Quick(array))
+	}
+	defer fmt.Println("Quick Sort Lasted: ", time.Since(start))
 
 	println("\nTesting Merge Sort")
 	start = time.Now()
-	fmt.Printf("  %v\n", Merge(array))
-	fmt.Println("  Lasted: ", time.Since(start))
+	if !tooLarge {
+		fmt.Printf("  %v\n", Merge(array))
+	}
+	defer fmt.Println("Merge Sort Lasted: ", time.Since(start))
+
+	println("\n")
 }
