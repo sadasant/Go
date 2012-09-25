@@ -12,10 +12,10 @@
 //   Testing Merge Sort
 //   
 //   
-//   Merge Sort Lasted:  3us
-//   Quick Sort Lasted:  2us
-//   Bubble Sort Lasted:  3us
-//   Insertion Sort Lasted:  3us
+//   Merge Sort Lasted:  2.0000000000000003e-06 s
+//   Quick Sort Lasted:  3e-06 s
+//   Bubble Sort Lasted:  2.0000000000000003e-06 s
+//   Insertion Sort Lasted:  3e-06 s
 //   
 //   Arrays were too large to print
 //
@@ -145,28 +145,28 @@ func main() {
 	if !tooLarge {
 		fmt.Printf("  %v\n", Insertion(array))
 	}
-	defer fmt.Println("Insertion Sort Lasted: ", time.Since(start))
+	defer fmt.Println("Insertion Sort Lasted: ", time.Since(start).Seconds(), "s")
 
 	println("\nTesting Bubble Sort")
 	start = time.Now()
 	if !tooLarge {
 		fmt.Printf("  %v\n", Bubble(array))
 	}
-	defer fmt.Println("Bubble Sort Lasted: ", time.Since(start))
+	defer fmt.Println("Bubble Sort Lasted: ", time.Since(start).Seconds(), "s")
 
 	println("\nTesting Quick Sort")
 	start = time.Now()
 	if !tooLarge {
 		fmt.Printf("  %v\n", Quick(array))
 	}
-	defer fmt.Println("Quick Sort Lasted: ", time.Since(start))
+	defer fmt.Println("Quick Sort Lasted: ", time.Since(start).Seconds(), "s")
 
 	println("\nTesting Merge Sort")
 	start = time.Now()
 	if !tooLarge {
 		fmt.Printf("  %v\n", Merge(array))
 	}
-	defer fmt.Println("Merge Sort Lasted: ", time.Since(start))
+	defer fmt.Println("Merge Sort Lasted: ", time.Since(start).Seconds(), "s")
 
 	println("\n")
 }
