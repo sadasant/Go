@@ -1,40 +1,17 @@
 package main
 
 import (
-	"encoding/json"
 	"flag"
 	"fmt"
 	irc "github.com/fluffle/goirc/client"
-	"io/ioutil"
 	"time"
 )
 
-type Config struct {
-	Nick     string
-	Password string
-	Server   string
-	Channel  string
-}
-
 var config Config
-
-func readConfig(filename string) {
-	defer println("Reading Config at: " + filename)
-	file, err := ioutil.ReadFile(filename)
-	if err != nil {
-		println(err)
-		return
-	}
-	err = json.Unmarshal(file, &config)
-	if err != nil {
-		println(err)
-		return
-	}
-}
 
 func main() {
 	flag.Parse()
-	readConfig(flag.Arg(0))
+	readConfig(flag.Arg(0)) // config.go
 	client := irc.SimpleClient(config.Nick)
 	client.AddHandler("connected", connected)
 	client.AddHandler("disconnected", disconnected)
@@ -55,7 +32,7 @@ func connected(conn *irc.Conn, line *irc.Line) {
 }
 
 func constantlyReadTwitter(conn *irc.Conn) {
-	twitter, err := readTwitter()
+	twitter, err := readTwitter() // twitter.go
 	defer constantlyReadTwitter(conn)
 	defer time.Sleep(10 * time.Second)
 	if err != nil {
