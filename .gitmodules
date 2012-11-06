@@ -1,3 +1,6 @@
 [submodule "src/copy"]
 	path = src/copy
 	url = git://github.com/sadasant/copy.git
+[submodule "src/VEbot"]
+	path = src/VEbot
+	url = git://github.com/sadasant/VEbot.git
